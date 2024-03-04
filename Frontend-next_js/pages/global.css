@@ -1,0 +1,60 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 13px !important;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+  user-select: none;
+}
+
+body a {
+    color:black;
+}
+body ul a {
+    text-decoration: none;
+}
+
+
+/* Select model Box */
+.contentmodelbox{
+  display: flex;
+  align-items: flex-start;
+}
+/* Select model Field */
+.contentmodelfield {
+  /* Your default styles for contentfield */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* Add any other styles you want for larger screens */
+}
+
+@media screen and (max-width: 405px) {
+  .contentmodelfield {
+    display: flex; /* Change to flex for a flex container */
+    flex-direction: column; /* Change to column for smaller screens */
+    margin: auto;
+  }
+  
+  h1 {
+    font-size: 20px; /* Set the font size for h1 to 10 pixels */
+  }
+
+  h2 {
+    font-size: 16px; /* Set the font size for h1 to 10 pixels */
+  }
+  .buttonmodelcontentfield{
+    margin-top:5%;
+  }
+  .generalrangecontent{
+    margin-top:5%;
+  }
+}
