@@ -1,0 +1,5 @@
+python infer_cli.py  --f0up_key 10 --input_path  /home/meowpong/Desktop/rvc/mydataset/test/supergod.wav --index_path "" --f0method "pm" --opt_path  /home/meowpong/Desktop/rvc/mydataset/test/god.wav --model_name  serana700_e200_s7200.pth  --index_rate 1  --filter_radius 3 --resample_sr 48000 --rms_mix_rate 2 --protect 5
+python infer_cli.py --f0up_key 0 --input_path /home/meowpong/Desktop/rvc/mydataset/test/harvard.wav --index_path "" --f0method pm --opt_path /home/meowpong/Desktop/rvc/mydataset/test/sample.wav --model_name testing40k.pth --index_rate 0 --filter_radius 3 --resample_sr 40000 --rms_mix_rate 1 --protect 0.33
+
+
+is half = xPU gpu avirable ?
