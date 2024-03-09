@@ -35,12 +35,24 @@ os.makedirs(os.path.join(now_dir, "assets/weights"), exist_ok=True)
 os.environ["TEMP"] = tmp
 warnings.filterwarnings("ignore")
 torch.manual_seed(114514)
+i18n = I18nAuto()
+logger.info(i18n)
+# 判断是否有能用来训练和加速推理的N卡
+ngpu = torch.cuda.device_count()
+gpu_infos = []
+mem = []
+if_gpu_ok = False
 
-sound_path = 'audio'
-model_path = 'assets/weights'
-extensions_sound = ['.mp3', '.wav']
 load_dotenv()
 config = Config()
+weight_root = os.getenv("weight_root")
+weight_uvr5_root = os.getenv("weight_uvr5_root")
+index_root = os.getenv("index_root")
+model_path = os.getenv("model_path")
+sound_path = os.getenv("sound_path")
+extensions_sound = os.getenv("extensions_sound").split(",")
+print(extensions_sound)  # Output: ['.mp3', '.wav']
+
 
 ###################### infer-process ##########################################
 def arg_parse() -> tuple:
@@ -96,13 +108,7 @@ if config.dml == True:
         return res
 
     fairseq.modules.grad_multiply.GradMultiply.forward = forward_dml
-i18n = I18nAuto()
-logger.info(i18n)
-# 判断是否有能用来训练和加速推理的N卡
-ngpu = torch.cuda.device_count()
-gpu_infos = []
-mem = []
-if_gpu_ok = False
+
 
 if torch.cuda.is_available() or ngpu != 0:
     for i in range(ngpu):
@@ -152,11 +158,10 @@ else:
     gpu_info = i18n("很遗憾您这没有能用的显卡来支持您训练")
     default_batch_size = 1
 gpus = "-".join([i[0] for i in gpu_infos])
+print(gpus)
 
 
-weight_root = os.getenv("weight_root")
-weight_uvr5_root = os.getenv("weight_uvr5_root")
-index_root = os.getenv("index_root")
+
 
 names = []
 for name in os.listdir(weight_root):
@@ -876,9 +881,16 @@ def get_sound():
 @app.route("/manage-sound/del", methods=['DELETE'])
 def delete_sound():
     try:
-        test = request.args.get("filename", default="", type=str)
-        if check_file_exist(test,sound_path) == "True":
-            return delfile(os.path.join(sound_path, test))
+        file = request.args.get("filename", type=str)
+        if not  file: 
+            return 'No file part',406
+        if file :
+            delfile(os.path.join(sound_path, file))
+            data = {
+                'status':'Delete MODEL',
+                'modelname':file,
+            }
+            return data
     except Exception as error:
         app.logger.error("Error ", error)
         return 'Error'
@@ -918,6 +930,10 @@ def uploadfile_sound():
         except Exception as error:
             print(error)
             return f'File {file.filename} not support .wav and .mp3 File size  maximum limit of 70 MB.',406
+    else :
+        return {
+        'Status':'Invalid file',
+        }
     
 
 
@@ -1051,13 +1067,16 @@ def rename_model():
 @app.route("/manage-model/del", methods=['DELETE'])
 def delete_model():
     try:
-        file = request.args.get("filename", default="", type=str)
-        shutil.rmtree(os.path.join(model_path, file))
-        data = {
-            'status':'Delete MODEL',
-            'modelname':file,
-        }
-        return data
+        file = request.args.get("filename", type=str)
+        if not  file: 
+            return 'No file part',406
+        if file :
+            shutil.rmtree(os.path.join(model_path, file))
+            data = {
+                'status':'Delete MODEL',
+                'modelname':file,
+            }
+            return data
     except Exception as error:
         app.logger.error("Error ", error)
         return 'Error'
@@ -1163,7 +1182,21 @@ def train_final():
         
     except Exception as E:
         print(E)
-    
+        
+@app.route('/train/indextrain', methods=['POST'])
+def index_training():
+    try:
+        exp_dir = str(request.form['exp_dir'])
+        version19 = str(request.form['version19'])
+        logs = []
+        #return train_index(exp_dir, version19)
+        #extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe)
+        for log in train_index(exp_dir, version19):
+            logs.append(log)
+        return jsonify({'status': 'success', 'logs': logs})
+        
+    except Exception as E:
+        print(E)
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 
