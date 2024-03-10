@@ -1212,7 +1212,7 @@ def train_final():
 
 @app.route('/train/indextrain', methods=['POST'])
 def index_training():
-    data = request.json()
+    data = request.get_json()
     if data:
         try:
             exp_dir = data.get('exp_dir')
