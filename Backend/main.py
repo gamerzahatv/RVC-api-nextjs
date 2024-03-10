@@ -1083,120 +1083,144 @@ def delete_model():
 #################################### infer process ######################
 @app.route('/infer', methods=['POST'])
 def vc_api():
-    f0up_key, input_path, index_path, f0method, opt_path, model_name, index_rate, device, is_half, filter_radius, resample_sr, rms_mix_rate, protect = arg_parse()
-    
-    f0up_key = int(request.form['f0up_key'])
-    input_path = str(request.form['input_path'])
-    index_path =  str(request.form['index_path'])
-    f0method = str(request.form['f0method'])
-    opt_path = str(request.form['opt_path'])
-    model_name = str(request.form['model_name'])
-    index_rate = float(request.form['index_rate'])
-    filter_radius = int(request.form['filter_radius'])
-    resample_sr = int(request.form['resample_sr'])
-    rms_mix_rate = float(request.form['rms_mix_rate'])
-    protect = float(request.form['protect'])
-    output_path = infer_func(f0up_key, input_path, index_path, f0method, opt_path, model_name, index_rate, device, is_half, filter_radius, resample_sr, rms_mix_rate, protect)
-    return jsonify({'output_path': output_path})
+    data = request.get_json()
+    if data:
+        f0up_key, input_path, index_path, f0method, opt_path, model_name, index_rate, device, is_half, filter_radius, resample_sr, rms_mix_rate, protect = arg_parse()
+        try:
+            f0up_key = int(data.get('f0up_key'))
+            input_path = data.get('input_path')
+            index_path = data.get('index_path')
+            f0method = data.get('f0method')
+            opt_path  = data.get('opt_path')
+            model_name = data.get('model_name')
+            index_rate = float(data.get('index_rate'))
+            filter_radius = int(data.get('filter_radius'))
+            resample_sr = int(data.get('resample_sr'))
+            rms_mix_rate = float(data.get('rms_mix_rate'))
+            protect = float(data.get('protect'))
+            output_path = infer_func(f0up_key, input_path, index_path, f0method, opt_path, model_name, index_rate, device, is_half, filter_radius, resample_sr, rms_mix_rate, protect)
+            return jsonify({'output_path': output_path})
+        except Exception as E:
+            return jsonify({'Error': E})
+        # f0up_key = int(request.form['f0up_key'])
+        # input_path = str(request.form['input_path'])
+        # index_path =  str(request.form['index_path'])
+        # f0method = str(request.form['f0method'])
+        # opt_path = str(request.form['opt_path'])
+        # model_name = str(request.form['model_name'])
+        # index_rate = float(request.form['index_rate'])
+        # filter_radius = int(request.form['filter_radius'])
+        # resample_sr = int(request.form['resample_sr'])
+        # rms_mix_rate = float(request.form['rms_mix_rate'])
+        # protect = float(request.form['protect'])
+    else:
+        return jsonify({'error': 'No JSON data received'}), 400
 
 ######################### Train Process ######################
 @app.route('/train/preprocess', methods=['POST'])
 def train_preprocess():
-    try:
-        trainset_dir = str(request.form['trainset_dir'])
-        #trainset_dir = "/home/meowpong/Desktop/testenv/Retrieval-based-Voice-Conversion-flaskapi-nextjs/train-api/dataset/andrew_huberman"
-        exp_dir  = str(request.form['exp_dir'])
-        #exp_dir = "testing48k"
-        #sr = "48k"  # Sampling rate
-        sr  = str(request.form['sr'])
-        #n_p = 2  # Number of processes
-        n_p = int(request.form['n_p'])
-        logs = []
-        for log in preprocess_dataset(trainset_dir, exp_dir, sr, n_p):
-            logs.append(log)
-        return jsonify({'status': 'success', 'logs': logs})
-        #if testpreprocess(trainset_dir,exp_dir,sr,n_p):
-        #    return 'yes'
-        #return 'yes'
-        
-    except Exception as E:
-        print(E)
+    data = request.get_json()
+    if data:
+        try:
+            trainset_dir = data.get('trainset_dir')
+            exp_dir = data.get('exp_dir')
+            sr = data.get('sr')
+            n_p = int(data.get('n_p'))
+            
+            logs = []
+            for log in preprocess_dataset(trainset_dir, exp_dir, sr, n_p):
+                logs.append(log)
+            #return jsonify({'status': 'success', 'logs': logs})
+            return jsonify({'status': 'success', 'logs': logs})
+        except Exception as E:
+            return jsonify({'Error': E})
+    else:
+        return jsonify({'error': 'No JSON data received'}), 400
         
 @app.route('/train/feature_extraction', methods=['POST'])
 def train_feature_extraction():
+    data = request.json()
     try:
-        gpus = str(request.form['gpus'])
-        #trainset_dir = "/home/meowpong/Desktop/testenv/Retrieval-based-Voice-Conversion-flaskapi-nextjs/train-api/dataset/andrew_huberman"
-        n_p  = int(request.form['n_p'])
-        f0method  = str(request.form['f0method'])
-        if_f0  = bool(request.form['if_f0'])
-        #n_p = 2  # Number of processes
-        exp_dir = str(request.form['exp_dir'])
-        version19 = str(request.form['version19'])
-        gpus_rmvpe = str(request.form['gpus_rmvpe'])
-        logs = []
-        #extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe)
-        for log in extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe):
-            logs.append(log)
-        return jsonify({'status': 'success', 'logs': logs})
+        if data:
+            gpus = data.get('gpus')
+            n_p = int(data.get('n_p'))
+            f0method = data.get('f0method')
+            if_f0 = bool(data.get('if_f0'))
+            exp_dir = data.get('exp_dir')
+            version19 = data.get('version19')
+            gpus_rmvpe = data.get('gpus_rmvpe')
+            logs = []
+            #extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe)
+            for log in extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe):
+                logs.append(log)
+            return jsonify({'status': 'success', 'logs': logs})
+        else:
+            return jsonify({'error': 'No JSON data received'}), 400
         
     except Exception as E:
         print(E)
         
 @app.route('/train/fulltrain', methods=['POST'])
 def train_final():
-    exp_dir = str(request.form['exp_dir'])
-    sr = str(request.form['sr'])
-    if_f0 = str(request.form['if_f0'])
-    spk_id5 = int(request.form['spk_id5'])
-    save_epoch = int(request.form['save_epoch'])
-    total_epoch =  int(request.form['total_epoch'])
-    batch_size = int(request.form['batch_size'])
-    if_save_latest =  str(request.form['if_save_latest'])
-    pretrained_G14 = str(request.form['pretrained_G14'])
-    pretrained_D15 = str(request.form['pretrained_D15'])
-    gpus = str(request.form['gpus'])
-    if_cache_gpu = str(request.form['if_cache_gpu']) 
-    if_save_every_weights = str(request.form['if_save_every_weights'])
-    version19 = str(request.form['version19'])
-    try:
-        logs = []  
-        for log in click_train(
-            exp_dir,
-            sr,
-            if_f0,
-            spk_id5,
-            save_epoch,
-            total_epoch,
-            batch_size,
-            if_save_latest,
-            pretrained_G14,
-            pretrained_D15,
-            gpus,
-            if_cache_gpu,
-            if_save_every_weights ,
-            version19
-            ,):
-            logs.append(log)
-        return jsonify({'status': 'success', 'logs': logs})
+    logs = []  
+    data = request.json()
+    if data:
+        exp_dir = data.get('exp_dir')
+        sr = data.get('sr')
+        if_f0 = data.get('if_f0')
+        spk_id5 = int(data.get('spk_id5', 0))  # default value if not provided
+        save_epoch = int(data.get('save_epoch', 0))
+        total_epoch = int(data.get('total_epoch', 0))
+        batch_size = int(data.get('batch_size', 0))
+        if_save_latest = data.get('if_save_latest')
+        pretrained_G14 = data.get('pretrained_G14')
+        pretrained_D15 = data.get('pretrained_D15')
+        gpus = data.get('gpus')
+        if_cache_gpu = data.get('if_cache_gpu')
+        if_save_every_weights = data.get('if_save_every_weights')
+        version19 = data.get('version19')
+        try:
+            for log in click_train(
+                exp_dir,
+                sr,
+                if_f0,
+                spk_id5,
+                save_epoch,
+                total_epoch,
+                batch_size,
+                if_save_latest,
+                pretrained_G14,
+                pretrained_D15,
+                gpus,
+                if_cache_gpu,
+                if_save_every_weights ,
+                version19
+                ,):
+                logs.append(log)
+            return jsonify({'status': 'success', 'logs': logs})
         
-    except Exception as E:
-        print(E)
-        
+        except Exception as E:
+            return jsonify({'error': E}), 400
+    else:
+        return jsonify({'error': 'No JSON data received'}), 400
+
 @app.route('/train/indextrain', methods=['POST'])
 def index_training():
-    try:
-        exp_dir = str(request.form['exp_dir'])
-        version19 = str(request.form['version19'])
-        logs = []
-        #return train_index(exp_dir, version19)
-        #extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe)
-        for log in train_index(exp_dir, version19):
-            logs.append(log)
-        return jsonify({'status': 'success', 'logs': logs})
-        
-    except Exception as E:
-        print(E)
+    data = request.json()
+    if data:
+        try:
+            exp_dir = data.get('exp_dir')
+            version19 = data.get('version19')
+            logs = []
+            for log in train_index(exp_dir, version19):
+                logs.append(log)
+            return jsonify({'status': 'success', 'logs': logs})
+        except Exception as E:
+            print(E)
+    else:
+         return jsonify({'error': 'No JSON data received'}), 400
+     
+     
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 
