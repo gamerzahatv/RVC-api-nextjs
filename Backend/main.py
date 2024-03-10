@@ -154,11 +154,14 @@ if torch.cuda.is_available() or ngpu != 0:
 if if_gpu_ok and len(gpu_infos) > 0:
     gpu_info = "\n".join(gpu_infos)
     default_batch_size = min(mem) // 2
+    print('gpu_info = ',gpu_info)
 else:
     gpu_info = i18n("很遗憾您这没有能用的显卡来支持您训练")
     default_batch_size = 1
+    print('gpu_info = ',gpu_info)
 gpus = "-".join([i[0] for i in gpu_infos])
-print(gpus)
+print('gpus=', gpus)
+
 
 
 
@@ -1139,9 +1142,9 @@ def train_preprocess():
         
 @app.route('/train/feature_extraction', methods=['POST'])
 def train_feature_extraction():
-    data = request.json()
-    try:
-        if data:
+    data = request.get_json()
+    if data:
+        try:
             gpus = data.get('gpus')
             n_p = int(data.get('n_p'))
             f0method = data.get('f0method')
@@ -1153,25 +1156,24 @@ def train_feature_extraction():
             #extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe)
             for log in extract_f0_feature(gpus, n_p, f0method, if_f0, exp_dir, version19, gpus_rmvpe):
                 logs.append(log)
-            return jsonify({'status': 'success', 'logs': logs})
-        else:
-            return jsonify({'error': 'No JSON data received'}), 400
-        
-    except Exception as E:
-        print(E)
-        
+            return jsonify({'status': 'success', 'logs': n_p})
+        except Exception as E:
+            print(E)
+    else:
+        return jsonify({'error': 'No JSON data received'}), 400  
+
+        #assets/pretrained_v2/f0G40k.pth   #assets/pretrained_v2/f0D40k.pth
 @app.route('/train/fulltrain', methods=['POST'])
 def train_final():
-    logs = []  
-    data = request.json()
+    data = request.get_json()
     if data:
         exp_dir = data.get('exp_dir')
         sr = data.get('sr')
-        if_f0 = data.get('if_f0')
-        spk_id5 = int(data.get('spk_id5', 0))  # default value if not provided
-        save_epoch = int(data.get('save_epoch', 0))
-        total_epoch = int(data.get('total_epoch', 0))
-        batch_size = int(data.get('batch_size', 0))
+        if_f0 = bool(data.get('if_f0'))
+        spk_id5 = int(data.get('spk_id5'))  # default value if not provided
+        save_epoch = int(data.get('save_epoch'))
+        total_epoch = int(data.get('total_epoch'))
+        batch_size = int(data.get('batch_size'))
         if_save_latest = data.get('if_save_latest')
         pretrained_G14 = data.get('pretrained_G14')
         pretrained_D15 = data.get('pretrained_D15')
@@ -1179,7 +1181,11 @@ def train_final():
         if_cache_gpu = data.get('if_cache_gpu')
         if_save_every_weights = data.get('if_save_every_weights')
         version19 = data.get('version19')
+        #/home/meowpong/Desktop/production-Vc-api/Vc-api-nextjs/Backend/assets/pretrained_v2/f0G40k.pth
+        #/home/meowpong/Desktop/production-Vc-api/Vc-api-nextjs/Backend/assets/pretrained_v2/f0D40k.pth
+        print('pretrained_G14 = ' , pretrained_G14 , 'pretrained_D15 =',pretrained_D15)
         try:
+            logs = []  
             for log in click_train(
                 exp_dir,
                 sr,
