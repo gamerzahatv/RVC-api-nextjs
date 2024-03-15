@@ -870,10 +870,8 @@ CORS(app)
 @app.route("/manage-sound/view", methods=['GET'])
 def get_sound():
     all_files = os.listdir(sound_path)
-    sound_files = [{'id': i + 1, 'text': file} for i, file in enumerate(all_files) if file.lower().endswith(('.mp3', '.wav'))]
-    if not sound_files:
-        #return 'not have file in directory'
-        return 'Null'
+    sound_files = [{'id': i + 0, 'text': file} for i, file in enumerate(all_files) if file.lower().endswith(('.mp3', '.wav'))]
+
     return jsonify(get_paginated_list(
     sound_files, 
     '/manage-sound/view', 
@@ -1010,35 +1008,39 @@ def uploadfile_modelindex():
 
 @app.route('/manage-model/view', methods=['GET'])
 def get_model():
-    modelpath_files = os.listdir(model_path)
-    model_file = os.listdir(model_path)
-    counter = 1
+    #modelpath_files = os.listdir(model_path)
+    counter = 0
     model_structure = []
     for root, dirs, files in os.walk(model_path):
+        
         folder_path = os.path.relpath(root, model_path)
+        
+
         # folder_info = {'folder_name': folder_path, 'files': []}
 
-        # Check if the files list is empty
-        if not files:
-            continue
         folder_info = {'model_name': folder_path, 'files': []}
 
         # Add a unique number to the folder_info dictionary
         folder_info['unique_number'] = counter
         counter += 1
+        
+        
+        
 
     # Collect information about files inside the folder
         for file in files:
             if file.lower().endswith(('.pth', '.index')):
                 file_path = os.path.join(root, file)
                 relative_path = os.path.relpath(file_path, model_path)
-                
+                # if file end with pth 
                 file_info = {
                     'file_count': len(folder_info['files']) + 1,
                     'file_name': relative_path,
                     # Add more fields as needed
                 }
                 folder_info['files'].append(file_info)
+                #print(file_info)
+                
 
     # Add the folder information to the model_structure
         model_structure.append(folder_info)
@@ -1226,7 +1228,42 @@ def index_training():
     else:
          return jsonify({'error': 'No JSON data received'}), 400
      
-     
+
+@app.route('/test', methods=['POST'])
+def test():
+    data = request.get_json()
+    if data:
+        f0up_key = int(data.get('f0up_key'))
+        input_path = data.get('input_path')
+        index_path = data.get('index_path')
+        f0method = data.get('f0method')
+        opt_path = data.get('opt_path')
+        model_name = data.get('model_name')
+        index_rate = float(data.get('index_rate'))
+        filter_radius = int(data.get('filter_radius'))
+        resample_sr = int(data.get('resample_sr'))
+        rms_mix_rate = float(data.get('rms_mix_rate'))
+        protect = float(data.get('protect'))
+        
+        # Create a dictionary to return
+        mydata = {
+            'f0up_key': f0up_key,
+            'input_path': input_path,
+            'index_path': index_path,
+            'f0method': f0method,
+            'opt_path': opt_path,
+            'model_name': model_name,
+            'index_rate': index_rate,
+            'filter_radius': filter_radius,
+            'resample_sr': resample_sr,
+            'rms_mix_rate': rms_mix_rate,
+            'protect': protect
+        }
+        
+        return jsonify(mydata)  # Return JSON response
+    else:
+        return jsonify({'error': 'No data provided'}), 400  # Return error if no data provided
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
 

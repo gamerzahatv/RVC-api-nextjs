@@ -6,6 +6,7 @@ import { Upload_music } from "./sound_manage/sc_sound_upload_content";
 import { Sound_view } from "./sound_manage/sc_sound_crud_manage";
 import {UploadModel} from "./model_manage/sc_model_upload_content";
 import { Model_view } from "./model_manage/sc_model_crud_manager";
+
 function SC_Manager({ closeSC_Manager, isMobile }) {
   return (
     <>

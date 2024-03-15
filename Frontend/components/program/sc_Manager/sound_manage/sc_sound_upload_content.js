@@ -36,7 +36,7 @@ export function Upload_music(){
       try {
         const response = await axios({
           method: 'POST',
-          url: 'http://192.168.1.38:5000/manage-sound/upload',
+          url: `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-sound/upload`,
           data: uploadmusicFormData,
           headers: { 'Content-Type': 'multipart/form-data' },
         })

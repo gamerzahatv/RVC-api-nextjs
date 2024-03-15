@@ -11,7 +11,7 @@ export function Sound_view() {
 
 
   useEffect(() => {
-    //console.log(currentPage)
+    console.log(currentPage)
     const fetchDataWithInterval = () => {
       if (currentPage <= 1) {
         setcurrentPage(1)
@@ -27,10 +27,10 @@ export function Sound_view() {
     // Initial fetch
     fetchDataWithInterval();
   
-    // Set up interval
+    //  Set up interval
     const intervalId = setInterval(fetchDataWithInterval,2500); // Replace 5000 with your desired interval in milliseconds
   
-    // Clean up interval on component unmount or when currentPage changes
+    //  Clean up interval on component unmount or when currentPage changes
     return () => clearInterval(intervalId)
   
   }, [currentPage])
@@ -38,10 +38,12 @@ export function Sound_view() {
 
   const fetchData = async (start) => {
     try {
-      const response = await axios.get(`http://192.168.1.38:5000/manage-sound/view?start=${start}&limit=${itemsPerPage}`);
-      setData(response.data)
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-sound/view?start=${start}&limit=${itemsPerPage}`
+      );
+      setData(response.data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   };
 
@@ -60,7 +62,7 @@ export function Sound_view() {
 
   const Deletefunc = (value,len) => {
     // console.log(len)
-    axios.delete(`http://192.168.1.38:5000/manage-sound/del?filename=${value}`)
+    axios.delete(`${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-sound/del?filename=${value}`)
     .then(response => {
       Swal.fire({
         title: 'Loading...',
@@ -106,7 +108,7 @@ export function Sound_view() {
       showLoaderOnConfirm: true,
       preConfirm: async (newfile) => {
         try {
-          axios.put(`http://192.168.1.38:5000/manage-sound/rename?oldfile=${oldfile}&newfile=${newfile}`)
+          axios.put(`${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-sound/rename?oldfile=${oldfile}&newfile=${newfile}`)
           .then(response => {
             //console.log(response.data.status)
             if (response.data.status){

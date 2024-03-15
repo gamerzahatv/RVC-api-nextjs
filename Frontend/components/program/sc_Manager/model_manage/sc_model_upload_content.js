@@ -74,7 +74,7 @@ export function UploadModel() {
       try {
         const response = await axios({
           method: "POST",
-          url: "http://192.168.1.38:5000/manage-model/upload/index",
+          url: `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-model/upload/index`,
           data: uploadmodelFormData,  // Fix variable name here
           headers: { "Content-Type": "multipart/form-data" },
         });
@@ -100,7 +100,7 @@ export function UploadModel() {
       try {
         const response = await axios({
           method: "POST",
-          url: "http://192.168.1.38:5000/manage-model/upload/not-index",
+          url: `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-model/upload/not-index`,
           data: uploadnoindexFormData,
           headers: { "Content-Type": "multipart/form-data" },
         });

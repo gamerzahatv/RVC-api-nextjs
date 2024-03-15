@@ -16,11 +16,9 @@ import {
   User,
   CdMusic,
   Progman34,
-  Mail,
 } from "@react95/icons";
 import Portfolio from "./program/portfolio";
 import CV from "./program/cv"
-import Tunes from "./program/tunes";
 import SC_Manager  from "./program/sc_Manager/sc_Manager_Layout";
 import SC_Process_Layout from "./program/sc_Process/sc_Process_Layout";
 
@@ -91,17 +89,7 @@ function Desktop() {
 
   const [cvOpened, toggleCV] = useState(false);
 
-  /* Tunes Shortcut */
 
-  const closeTunes = () => {
-    toggleTunes(false);
-  };
-
-  const openTunes = () => {
-    toggleTunes(true);
-  };
-
-  const [tunesOpened, toggleTunes] = useState(false);
 
 
   /* SC_Manager  Shortcut */
@@ -365,15 +353,6 @@ function Desktop() {
       <TaskBar
         list={
           <List>
-            <List.Item
-              as="a"
-              href="mailto:janne.ilkka@gmail.com"
-              icon={<Mail variant="32x32_4" />}
-              target="_blank"
-            >
-              Email me
-            </List.Item>
-            <List.Divider />
             <List.Item icon={<Progman34 variant="32x32_4" />}>
               Socials
               <List>
@@ -390,23 +369,6 @@ function Desktop() {
                   </List.Item>
                 ))}
               </List>
-            </List.Item>
-            <List.Item icon={<CdMusic variant="32x32_4" />}>
-              Tunes
-              <List>
-                <List.Item
-                  onClick={handleOpenVaporwaveModal1}
-                  icon={<CdMusic variant="32x32_4" />}
-                >
-                  Janne's Vaporwave Story from 2018
-                </List.Item>
-              </List>
-            </List.Item>
-            <List.Item
-              icon={<User variant="32x32_4" />}
-              onClick={handleOpenPhotoModal}
-            >
-              Janne
             </List.Item>
             <List.Item
               icon={<Mspaint variant="32x32_4" />}
@@ -428,7 +390,6 @@ function Desktop() {
         <DesktopIcon
           openPortfolio={openPortfolio}
           openCV={openCV}
-          openTunes={openTunes}
           openSC_Manager={openSC_Manager}
           openSC_Process={openSC_Process}
         />
@@ -440,9 +401,6 @@ function Desktop() {
           />
         )}
         {cvOpened && <CV items={items} closeCV={closeCV}  />}
-        {tunesOpened && (
-          <Tunes items={items} closeTunes={closeTunes} />
-        )}
         {SC_ManagerOpened && <SC_Manager  items={items} closeSC_Manager={closeSC_Manager}  />}
         {SC_ProcessOpened && <SC_Process_Layout items={items} closeSC_Process={closeSC_Process}  />}
 

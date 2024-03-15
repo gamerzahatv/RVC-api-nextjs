@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Button } from "@react95/core";
-import Swal from "sweetalert2";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import { Button } from "@react95/core"
+import Swal from "sweetalert2"
+
 
 export function Model_view() {
   const [data, setData] = useState({ count: 0, results: [] });
@@ -33,7 +34,7 @@ export function Model_view() {
   const fetchData = async (start) => {
     try {
       const response = await axios.get(
-        `http://192.168.1.38:5000/manage-model/view?start=${start}&limit=${itemsPerPage}`
+        `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-model/view?start=${start}&limit=${itemsPerPage}`
       );
       setData(response.data);
     } catch (error) {
@@ -56,7 +57,7 @@ export function Model_view() {
   const Deletefunc = (value, len) => {
     // console.log(len)
     axios
-      .delete(`http://192.168.1.38:5000/manage-model/del?filename=${value}`)
+      .delete(`${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-model/del?filename=${value}`)
       .then((response) => {
         Swal.fire({
           title: "Loading...",
@@ -94,14 +95,14 @@ export function Model_view() {
         autocapitalize: "off",
       },
       showCancelButton: true,
-      confirmButtonText: "Look up",
+      confirmButtonText: "Rename Model",
       showLoaderOnConfirm: true,
       preConfirm: async (newfile) => {
         console.log("changename :", oldfile, "to", newfile);
         try {
           axios
             .put(
-              `http://192.168.1.38:5000/manage-model/rename?oldfile=${oldfile}&newfile=${newfile}`
+              `${process.env.NEXT_PUBLIC_APP_URL}:${process.env.NEXT_PUBLIC_APP_Port}/manage-model/rename?oldfile=${oldfile}&newfile=${newfile}`
             )
             .then((response) => {
               //console.log(response.data.status)
@@ -133,47 +134,40 @@ export function Model_view() {
   return (
     <div>
       <h1>Table CRUD MODEL</h1>
-      <table>
+      <table >
         <thead>
           <tr>
             <th>ID</th>
             <th>MODEL</th>
+            <th>Files</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {results.map((item) => (
-            <tr key={item.unique_number}>
-              {<td>{item.unique_number}</td>}
-              {<td>{item.model_name}</td>}
+          {results.map((item, index) => (
+            <tr key={index}>
+              <td>{item.unique_number}</td>
+              <td>{item.model_name}</td>
               <td>
-                <Button onClick={() => Renamefunc(item.model_name)}>
-                  Rename
-                </Button>
-                <Button
-                  onClick={() =>
-                    Deletefunc(item.model_name, item.unique_number)
-                  }
-                >
-                  Delete
-                </Button>
+                {item.files.map((file, fileIndex) => (
+                  <div key={fileIndex}>{file.file_name}</div>
+                ))}
+              </td>
+              <td>
+                <Button  onClick={() => Renamefunc(item.model_name)}>Rename</Button>
+                <Button onClick={() => Deletefunc(item.model_name, item.unique_number)}>Delete</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div>
-        <button onClick={handlePreviousPage} disabled={currentPage <= 1}>
-          Previous
-        </button>
-
-        <button
-          onClick={handleNextPage}
-          disabled={currentPage + itemsPerPage > count}
-        >
-          Next
-        </button>
+      <div >
+        <button  onClick={handlePreviousPage} disabled={currentPage <= 1}>Previous</button>
+        <button onClick={handleNextPage} disabled={currentPage + itemsPerPage > count}>Next</button>
       </div>
+      
+      
+
     </div>
   );
 }

@@ -15,14 +15,6 @@ function DesktopIcon({ openPortfolio, openCV, openTunes ,openSC_Manager, openSC_
           <Awfxcg321303 className="pointer" variant="32x32_4" />
           <IconText className="pointer">CV.txt</IconText>
         </IconBox>
-        <IconBox className="pointer" onClick={() => openTunes()}>
-          <CdMusic className="pointer" variant="32x32_4" />
-          <IconText className="pointer">Tunes</IconText>
-        </IconBox>
-        <IconBox className="pointer" >
-          <CdSearch className="pointer" variant="32x32_4" />
-          <IconText className="pointer">Q & A_SCV</IconText>
-        </IconBox>
         <IconBox className="pointer" onClick={() => openSC_Process()} >
           <Cdplayer110 className="pointer" variant="32x32_4" />
           <IconText className="pointer">SC_Process</IconText>
