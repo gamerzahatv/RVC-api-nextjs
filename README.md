@@ -351,8 +351,6 @@ import api collection ใน  postman
 ##  ตัวอย่างที่1ผลลัพธ์อย่างการใช้ api กับ  wav2lip
 https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6-b867-3efb201285bc
 
-
-
 ---
 ##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
 ต้นฉบับ
@@ -363,29 +361,3 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/187aa288-065c-457b
 
 mix
 https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/e85945f2-02b1-40ee-b3d3-bf4f8092d54f
-
-
----
-##  ตัวอย่างที่3ผลลัพธ์ตัวอย่างการใช้ api 
-ต้นฉบับ
-
-ผลลัพธ์
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/1d93d5cb-66f0-42b8-a478-117e0ef00794
-
