@@ -350,7 +350,7 @@ import api collection ใน  postman
 ---
 ##  1,ผลลัพธ์อย่างการใช้ api กับ  wav2lip
 <video controls>
-<source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/api%2Bwav2lip.mp4" type="video/mp4">
+<source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4" type="video/mp4">
 </video>
 
 ---
