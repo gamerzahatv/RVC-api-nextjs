@@ -354,7 +354,7 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6
 ---
 ##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
 ต้นฉบับ
-https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/140ef1bb-ee55-4bf2-91b1-10862f0388ba
+https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/all/instragram%20all%20(1).mov
 
 
 
