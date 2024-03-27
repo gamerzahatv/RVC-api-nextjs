@@ -356,15 +356,14 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6
 ---
 ##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
 ต้นฉบับ
-<video controls="" autoplay="" name="media">
-    <source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/all/instragram%20all.mp3?raw=true" type="audio/mp3">
-</video>
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/aeb471f4-1f2a-4c00-bc38-8df085976c98
 
 ผลลัพธ์
-https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/2ec8b007-7a86-47d6-bd8b-d9ba26edf0ac
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/187aa288-065c-457b-95c1-9c4c9146572f
 
 mix
-https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/0e810771-e56a-4bca-8e50-3ad8a744c513
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/e85945f2-02b1-40ee-b3d3-bf4f8092d54f
+
 
 ---
 ##  ตัวอย่างที่3ผลลัพธ์ตัวอย่างการใช้ api 
