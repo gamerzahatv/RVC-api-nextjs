@@ -52,6 +52,7 @@ conda create -n <ชื่อสภาพแวดล้อมใหม่> pyth
 ```bash
 conda create -n TestEnvironment python=3.10 numpy matplotlib
 ```
+ติดตั้งโมดูลใน python
 ```bash
 pip install -r requirements.txt
 ```
@@ -75,18 +76,18 @@ python main.py
 ## Environment Variables
 
 #### .env ในโฟลเดอร์ Backend
-`NEXT_PUBLIC_APP_URL="http://localhost"`
-`NEXT_PUBLIC_APP_Port=5000`
+`NEXT_PUBLIC_APP_URL="http://localhost"`<br>
+`NEXT_PUBLIC_APP_Port=5000`<br>
 
 #### .env.local ในโฟลเดอร์ Backend Frontend
-`OPENBLAS_NUM_THREADS = 1`
-`no_proxy = localhost, 127.0.0.1, ::1 `
-`weight_root = assets/weights`
-`weight_uvr5_root = assets/uvr5_weights`
-`index_root = logs`
-`rmvpe_root = assets/rmvpe`
-`sound_path = audio`
-`model_path = assets/weights`
+`OPENBLAS_NUM_THREADS = 1`<br>
+`no_proxy = localhost, 127.0.0.1, ::1 `<br>
+`weight_root = assets/weights`<br>
+`weight_uvr5_root = assets/uvr5_weights`<br>
+`index_root = logs`<br>
+`rmvpe_root = assets/rmvpe`<br>
+`sound_path = audio`<br>
+`model_path = assets/weights`<br>
 `extensions_sound =".mp3,.wav"`
 
 ## คู่มือการใช้ api
@@ -102,8 +103,7 @@ Preprocess
 | :-------- | :------- | :----------|:------------------------- |
 | `trainset_dir` | `string` |`""`| training folder path |
 | `exp_dir` | `string` |`""`| Enter experiment name|
-| `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  ||   warning! [It's caused by you change the sample rate when you continue training.
-If you want to change the sample_rate, you should start a new experiment.] |
+| `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
 | `n_p` | `int` |`""`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                         Number of cpu processes used to extract pitches and process data|
 
 ```ตัวอย่าง JSON BODY
