@@ -93,19 +93,19 @@ python main.py
 ## คู่มือการใช้ api
 
 #### วิธีการเทรนโมเดล
-Preprocess
+1. Preprocess
 
 ```http
   POST /train/preprocess
 ```
+Json Body 
 
 | Parameter | Type     | Value      |Description                |
-| :-------- | :------- | :----------|:------------------------- |
+| :-------- | :------- | :-------------|:------------------------- |
 | `trainset_dir` | `string` |`""`| training folder path |
 | `exp_dir` | `string` |`""`| Enter experiment name|
 | `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
 | `n_p` | `int` |`nuber core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  Number of cpu processes used to extract pitches and process data|
-Json Body
 
 ```json
 {
@@ -115,25 +115,32 @@ Json Body
   "n_p": 4
 }
 ```
-#### Get item
+2. feature extraction
 
 ```http
-  GET /api/items/${id}
+  GET /train/feature_extraction
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
+| Parameter | Type     |    value     | Description                       |
+| :-------- | :------- | :------------|:--------------------------------  |
+| `gpus`    | `LiteralString` |Int-int  or  “” |ใส่เลขgpuที่ใช้คั่นด้วย - เช่น 0-1-2 ใช้บัตร 0 และบัตร 1 และบัตร 2|
+| `n_p`    | `int` |   `nuber core cpu` |Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                      คอร์ซีพียู|
+| `f0method`    | `string` |  เลือกอันเดียวเท่านั้น ["pm", "harvest", "dio", "rmvpe", "rmvpe_gpu"] เลือกอัลกอริธึมการแยกระดับเสียง: เมื่อป้อนข้อมูลการร้องเพลง คุณสามารถใช้ pm เพื่อเร่งความเร็ว สำหรับเสียงพูดคุณภาพสูงแต่ CPU ต่ำ คุณสามารถใช้ dio เพื่อเร่งความเร็ว การเก็บเกี่ยวมีคุณภาพดีกว่า แต่ช้ากว่า rmvpe ให้เอฟเฟกต์และการบริโภคที่ดีที่สุด CPU/GPU น้อยลง |
+| `if_f0`    | `boolean` |  true or false |ต้องใช้สำหรับการร้องเพลง แต่ไม่จำเป็นสำหรับการพูด|
+| `exp_dir`    | `string` |     ""  |ตั้งชื่อโมเดลที่ต้องการเทรน|
+| `version19`    | `string` |    “v1” or “v2”  |เวอร์ชั่น|
+| `gpus_rmvpe`    | `LiteralString` | “ Int-int “  or  “” |การกำหนดค่าหมายเลขการ์ด Rmvpe: แยกหมายเลขอินพุตการ์ดของกระบวนการต่างๆ ที่ใช้ เช่น 0 0 1 ใช้เพื่อรัน 2 โปรเซสบนการ์ด 0 และรัน 1 โปรเซสบนการ์ด 1|
+```json
+{
+  "gpus":"",
+  "n_p":4,
+  "f0method":"pm",
+  "if_f0":true,
+  "exp_dir":"test48k_80e",
+  "version19" :"v2",
+  "gpus_rmvpe": ""
+}
+```
 ## Run Locally
 
 โคลนโปรเจค
