@@ -354,7 +354,9 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6
 ---
 ##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
 ต้นฉบับ
-https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/aeb471f4-1f2a-4c00-bc38-8df085976c98
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/140ef1bb-ee55-4bf2-91b1-10862f0388ba
+
+
 
 ผลลัพธ์
 https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/187aa288-065c-457b-95c1-9c4c9146572f
