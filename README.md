@@ -76,20 +76,21 @@ python main.py
 ## Environment Variables
 
 #### .env ในโฟลเดอร์ Backend
-
+```plaintext
 NEXT_PUBLIC_APP_URL="http://localhost"
 NEXT_PUBLIC_APP_Port=5000
+```
 
 #### .env.local ในโฟลเดอร์ Backend Frontend
 
-`OPENBLAS_NUM_THREADS = 1`<br>
-`no_proxy = localhost, 127.0.0.1, ::1 `<br>
-`weight_root = assets/weights`<br>
-`weight_uvr5_root = assets/uvr5_weights`<br>
-`index_root = logs`<br>
-`rmvpe_root = assets/rmvpe`<br>
-`sound_path = audio`<br>
-`model_path = assets/weights`<br>
+OPENBLAS_NUM_THREADS = 1`
+`no_proxy = localhost, 127.0.0.1, ::1 `
+`weight_root = assets/weights`
+`weight_uvr5_root = assets/uvr5_weights`
+`index_root = logs`
+`rmvpe_root = assets/rmvpe`
+`sound_path = audio`
+`model_path = assets/weights`
 `extensions_sound =".mp3,.wav"`
 
 ## คู่มือการใช้ api
