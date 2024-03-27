@@ -357,7 +357,7 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6
 ##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
 ต้นฉบับ
 <video controls="" autoplay="" name="media">
-    <source src="[https://user.github.io/project/audio/sound.mp3" type="audio/mp3](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/all/instragram%20all.mp3)">
+    <source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/all/instragram%20all.mp3" type="audio/mp3">
 </video>
 
 ผลลัพธ์
