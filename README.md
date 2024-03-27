@@ -130,7 +130,7 @@ Json Body
 ```http
   POST /train/feature_extraction
 ```
-
+Json Body 
 | Parameter | Type     |    value     | Description                       |
 | :-------- | :------- | :------------|:--------------------------------  |
 | `gpus`    | `LiteralString` |Int-int  or  “” |ใส่เลขgpuที่ใช้คั่นด้วย - เช่น 0-1-2 ใช้card 0 และcard 1 และcard 2|
@@ -157,7 +157,7 @@ Json Body
 ```http
   POST /train/feature_extraction
 ```
-
+Json Body 
 | Parameter | Type     |    value     | Description                       |
 | :-------- | :------- | :------------|:--------------------------------  |
 | `exp_dir`    | `String` |“” |ชื่อโมเดลที่ต้องการเทรน|
@@ -197,6 +197,7 @@ Json Body
 ```http
   POST /train/indextrain
 ```
+Json Body 
 | Parameter | Type     |    value     | Description                       |
 | :-------- | :------- | :------------|:--------------------------------  |
 | `exp_dir`    | `String` |“” |ชื่อโมเดลที่ต้องการเทรน|
@@ -361,4 +362,20 @@ https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/dcff1bbd-4455-43a6
 
 #### mix
 https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/62156c90-12ed-4c47-b6e7-4ce49c8e6e8c
+
+##  ตัวอย่างที่3ผลลัพธ์ตัวอย่างการใช้ api 
+#### ต้นฉบับ
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/69841d1d-13e2-4a5a-aa37-3a241f008564
+
+#### ผลลัพธ์
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/aba95d0d-4cd2-40fc-beea-976c84b64e23
+
+##  ตัวอย่างที่4ผลลัพธ์ตัวอย่างการใช้ api
+#### ต้นฉบับ
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/9c2f326b-58d2-41f8-9c23-85643556a52c
+
+#### ผลลัพธ์
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f9abb2a3-3e76-4ab1-9e8e-cb2ffaa25e04
+
+
 
