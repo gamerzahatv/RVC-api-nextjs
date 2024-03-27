@@ -104,9 +104,10 @@ Preprocess
 | `trainset_dir` | `string` |`""`| training folder path |
 | `exp_dir` | `string` |`""`| Enter experiment name|
 | `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
-| `n_p` | `int` |`""`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                         Number of cpu processes used to extract pitches and process data|
+| `n_p` | `int` |`nuber core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  Number of cpu processes used to extract pitches and process data|
+Json Body
 
-```ตัวอย่าง JSON BODY
+```json
 {
   "trainset_dir": "dataset/andrew_huberman",
   "exp_dir": "test48k_80e",
