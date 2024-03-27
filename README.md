@@ -1,7 +1,11 @@
 
-# Project Title
+# RVC-api-nextjs
 
-A brief description of what this project does and who it's for
+api rvc with flask and next js with webapp
+
+<div align="center">
+    <img src="">
+</div>
 
 ## เครื่องมือที่ใช้งานทั้งหมด
 
@@ -16,6 +20,7 @@ A brief description of what this project does and who it's for
  - [ULTIMATE VOCAL REMOVER V5](https://ultimatevocalremover.com/)
  - [Audacity](https://www.audacityteam.org/)
 
+---
 
 ## Tech Stack
 
@@ -25,12 +30,13 @@ A brief description of what this project does and who it's for
 
 **VM:** Proxmox
 
-
+---
 ## Features
 
 - สามารถนำ api ประยุกต์ใช้ได้ทุก platform
 - มีเว็บแอปพลิเคชันให้ใช้งาน
 
+---
 
 ## วิธีการติดตั้ง
 #### ดาวน์โหลดโมเดล
@@ -72,7 +78,7 @@ python main.py
 ```bash
   npm run dev
 ```
-
+---
 ## Environment Variables
 
 #### .env ในโฟลเดอร์ Backend
@@ -93,7 +99,7 @@ sound_path = audio
 model_path = assets/weights
 extensions_sound =".mp3,.wav"
 ```
-
+---
 ## คู่มือการใช้ api
 
 #### วิธีการเทรนโมเดล
@@ -242,21 +248,18 @@ Json Body
 ```http
   POST /manage-model/upload/index
 ```
-Form data
-
+Form data 
 | Parameter | Type     |    value     |
 | :-------- | :------- | :------------|
 | `modelname`   | `string` |`0-12` |
 | `pth`    | `file` | `"audio/เสียงที่ต้องการแปลง"` |
-| `index`    | `file` | `"audio/เสียงที่ต้องการแปลง"` |
+| `index`    | `file` | `"index file"` |
 
 #### อัปโหลดไฟล์ไม่มี index
-
 ```http
   POST /manage-model/upload/not-index
 ```
 Form data 
-
 | Parameter | Type     |    value     |
 | :-------- | :------- | :------------|
 | `modelname`   | `string` |`""` |
@@ -264,13 +267,10 @@ Form data
 
 
 #### อัปโหลด ไฟล์เสียง
-form data 
-
 ```http
   POST /manage-sound/upload
 ```
-Form data
-
+Form data 
 | Parameter | Type     |    value     |
 | :-------- | :------- | :------------|
 | `audioFile`   | `file` |`.mp3 or  .wav` |
@@ -280,14 +280,14 @@ Form data
 Query Params
 
 ```http
-  GET /manage-sound/upload
+  GET /manage-sound/view?start=1&limit=5
 ```
 | Parameter | Type     |    value     |
 | :-------- | :------- | :------------|
 | `start`   | `int` |`1` |
 | `limit`   | `int` |`5` |
 
-#### แสดงผลไฟล์เสียงทั้งหมด
+#### แสดงผลโมเดลทั้งหมด
 Query Params
 
 ```http
@@ -299,34 +299,47 @@ Query Params
 | `limit`   | `int` |`5` |
 
 
-## Run Locally
+#### เปลี่ยนชื่อโมเดล
+Query Params
 
-โคลนโปรเจค
-
-```bash
-  git clone https://github.com/gamerzahatv/RVC-api-nextjs.git
+```http
+  PUT /manage-model/rename?oldfile=&newfile
 ```
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `oldfile`   | `string` |`"ชื่อไฟล์เก่า"` |
+| `newfile`   | `string` |`"ชื่อไฟล์ใหม่"` |
 
-ไปเปิดการทำงานของฝั่งเซิฟเวอร์
+### เปลี่ยนชื่อไฟล์เสียง
+Query Params
 
-```bash
-  cd Backend
+```http
+  PUT /manage-sound/rename?oldfile&newfile
 ```
-```bash
-  cd npm run dev
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `oldfile`   | `string` |`"ชื่อไฟล์เก่า"` |
+| `newfile`   | `string` |`"ชื่อไฟล์ใหม่"` |
+
+#### ลบโมเดล
+Query Params
+
+```http
+  DELETE /manage-model/del?filename
 ```
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `filename`   | `string` |`"โฟลเดอร์โมเดลใน assets/weights"` |
+---
 
-ไปเปิดการทำงานของฝั่งเซิฟเวอร์
-
-```bash
-  npm install
+### ลบไฟล์เสียง
+```http
+  DELETE /manage-model/del?filename
 ```
-
-Start the server
-
-```bash
-  npm run start
-```
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `filename`   | `string` |`"ไฟล์เสียงในโฟลเดอร์ audio"` |
+---
 
 
 ## Deployment
