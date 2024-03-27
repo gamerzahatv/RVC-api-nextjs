@@ -1,0 +1,547 @@
+{
+	"info": {
+		"_postman_id": "cd90365e-d36d-4732-8e3e-1285bc2ed288",
+		"name": "API_RVC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20625235"
+	},
+	"item": [
+		{
+			"name": "Train",
+			"item": [
+				{
+					"name": "Preprocess",
+					"item": [
+						{
+							"name": "Preprocess",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"trainset_dir\": \"dataset/andrew_huberman\",\n  \"exp_dir\": \"test48k_80e\",\n  \"sr\": \"48k\",\n  \"n_p\": 4\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localdev}}:{{flask_port}}/train/preprocess",
+									"host": [
+										"{{localdev}}"
+									],
+									"port": "{{flask_port}}",
+									"path": [
+										"train",
+										"preprocess"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "feature_extraction",
+					"item": [
+						{
+							"name": "feature_extraction",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gpus\":\"\",\n    \"n_p\":4,\n    \"f0method\":\"pm\",\n    \"if_f0\":true,\n    \"exp_dir\":\"test48k_80e\",\n    \"version19\" :\"v2\",\n    \"gpus_rmvpe\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localdev}}:{{flask_port}}/train/feature_extraction",
+									"host": [
+										"{{localdev}}"
+									],
+									"port": "{{flask_port}}",
+									"path": [
+										"train",
+										"feature_extraction"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fulltrain",
+					"item": [
+						{
+							"name": "Fulltrain",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"exp_dir\":\"test48k_80e\",\n  \"sr\":\"48k\",\n  \"if_f0\":true,\n  \"spk_id5\":0,\n  \"save_epoch\":10,\n  \"total_epoch\":80,\n  \"batch_size\":1,\n  \"if_save_latest\":\"Yes\",\n  \"pretrained_G14\":\"assets/pretrained_v2/f0G48k.pth\",\n  \"pretrained_D15\":\"assets/pretrained_v2/f0D48k.pth\",\n  \"gpus\":\"\",\n  \"if_cache_gpu\":\"No\",\n  \"if_save_every_weights\":\"Yes\",\n  \"version19\":\"v2\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localdev}}:{{flask_port}}/train/fulltrain",
+									"host": [
+										"{{localdev}}"
+									],
+									"port": "{{flask_port}}",
+									"path": [
+										"train",
+										"fulltrain"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "indextrain",
+					"item": [
+						{
+							"name": "index",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"exp_dir\":\"test48k_80e\",\n    \"version19\":\"v2\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localdev}}:{{flask_port}}/train/indextrain",
+									"host": [
+										"{{localdev}}"
+									],
+									"port": "{{flask_port}}",
+									"path": [
+										"train",
+										"indextrain"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "CREATE",
+					"item": [
+						{
+							"name": "Upload_model",
+							"item": [
+								{
+									"name": "upload_model_notindex",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "modelname",
+													"value": "test",
+													"type": "text"
+												},
+												{
+													"key": "pth",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-model/upload/not-index",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-model",
+												"upload",
+												"not-index"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "upload_model_haveindex",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "modelname",
+													"value": "test",
+													"type": "text"
+												},
+												{
+													"key": "pth",
+													"type": "file",
+													"src": []
+												},
+												{
+													"key": "index",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-model/upload/index",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-model",
+												"upload",
+												"index"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Upload_sound",
+							"item": [
+								{
+									"name": "UploadSound",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "audioFile",
+													"type": "file",
+													"src": []
+												}
+											]
+										},
+										"url": {
+											"raw": "{{labtop_codeenv}}:{{flask_port}}/manage-sound/upload",
+											"host": [
+												"{{labtop_codeenv}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-sound",
+												"upload"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "READ",
+					"item": [
+						{
+							"name": "view_sound",
+							"item": [
+								{
+									"name": "view_sound",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-sound/view?start=1&limit=5",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-sound",
+												"view"
+											],
+											"query": [
+												{
+													"key": "start",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "view_model",
+							"item": [
+								{
+									"name": "view_model",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-model/view?start=1&limit=5",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-model",
+												"view"
+											],
+											"query": [
+												{
+													"key": "start",
+													"value": "1"
+												},
+												{
+													"key": "limit",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "UPDATE",
+					"item": [
+						{
+							"name": "rename_model",
+							"item": [
+								{
+									"name": "rename_model",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-model/rename?oldfile=&newfile",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-model",
+												"rename"
+											],
+											"query": [
+												{
+													"key": "oldfile",
+													"value": ""
+												},
+												{
+													"key": "newfile",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "rename_sound",
+							"item": [
+								{
+									"name": "rename_sound",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-sound/rename?oldfile&newfile",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-sound",
+												"rename"
+											],
+											"query": [
+												{
+													"key": "oldfile",
+													"value": null
+												},
+												{
+													"key": "newfile",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "delete_model",
+							"item": [
+								{
+									"name": "model_del",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-model/del?filename",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-model",
+												"del"
+											],
+											"query": [
+												{
+													"key": "filename",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "delete_sound",
+							"item": [
+								{
+									"name": "sound_del",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{localdev}}:{{flask_port}}/manage-sound/del?filename",
+											"host": [
+												"{{localdev}}"
+											],
+											"port": "{{flask_port}}",
+											"path": [
+												"manage-sound",
+												"del"
+											],
+											"query": [
+												{
+													"key": "filename",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "infer",
+			"item": [
+				{
+					"name": "infer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"f0up_key\": 0,\n  \"input_path\": \"audio/supergod.wav\",\n  \"index_path\": \"logs/trained_IVF311_Flat_nprobe_1_test40k120e_v2.index\",\n  \"f0method\": \"pm\",\n  \"opt_path\": \"audio_output/sample.wav\",\n  \"model_name\":\"test40k120e_e120_s240.pth\",\n  \"index_rate\":1,\n  \"filter_radius\": 1,\n  \"resample_sr\":40000,\n  \"rms_mix_rate\":0.75,\n  \"protect\": 0.2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pve_codeenv}}:{{flask_port}}/infer",
+							"host": [
+								"{{pve_codeenv}}"
+							],
+							"port": "{{flask_port}}",
+							"path": [
+								"infer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "testing",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"f0up_key\": 0,\n  \"input_path\": \"audio/supergod.wav\",\n  \"index_path\": \"logs/trained_IVF311_Flat_nprobe_1_test40k120e_v2.index\",\n  \"f0method\": \"pm\",\n  \"opt_path\": \"audio_output/sample.wav\",\n  \"model_name\":\"test40k120e_e120_s240.pth\",\n  \"index_rate\":1,\n  \"filter_radius\": 1,\n  \"resample_sr\":40000,\n  \"rms_mix_rate\":0.75,\n  \"protect\": 0.2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localdev}}:{{flask_port}}/test",
+					"host": [
+						"{{localdev}}"
+					],
+					"port": "{{flask_port}}",
+					"path": [
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
