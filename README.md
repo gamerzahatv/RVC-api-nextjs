@@ -356,7 +356,9 @@ import api collection ใน  postman
 ---
 ##  2.ผลลัพธ์ตัวอย่างการใช้ api 
 ![](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3)
-
+<audio controls="controls">
+  <source type="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3" src="filename.mp3"></source>
+</audio>
 ---
 ##  3.ผลลัพธ์ตัวอย่างการใช้ api 
 
