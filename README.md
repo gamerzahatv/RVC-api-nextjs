@@ -343,7 +343,7 @@ Query Params
 
 
 ## Deployment
-
+import api collection ใน  postman
  - [api collection](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/docs/postman_collection/API_RVC.postman_collection.json)
  - [env_api](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/docs/postman_collection/local_test.postman_environment.json)
 To deploy this project run
