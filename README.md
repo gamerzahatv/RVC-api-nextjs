@@ -333,6 +333,7 @@ Query Params
 ---
 
 ### ลบไฟล์เสียง
+Query Params
 ```http
   DELETE /manage-model/del?filename
 ```
