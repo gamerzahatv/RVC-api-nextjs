@@ -211,7 +211,7 @@ Json Body
 | :-------- | :------- | :------------|:--------------------------------  |
 | `f0up_key`    | `int` |`0-12` |ปรับเสียงสูงเสียงต่ำ|
 | `input_path`    | `String` | `"audio/เสียงที่ต้องการแปลง"` |ตำแหน่งของโฟลเดอร์ที่ต้องการแปลงเสียง|
-| `index_path`    | `String` | `""` |ตำแหน่งของไฟล์index|
+| `index_path`    | `String` | `""` |ตำแหน่งของไฟล์ index ที่ได้จากการเทรนโมเดลจากโฟลเดอร์ log/|
 | `f0method`    | `String` | `"["pm", "harvest", "crepe", "rmvpe"]"` |เลือกอัลกอริทึม["pm", "harvest", "crepe", "rmvpe"]|
 | `opt_path`    | `String` | `"audio_output/ไฟล์เสียงที่แปลงเสียงเสร็จแล้ว"` |ไฟล์ที่ได้หลักจากประมวลผลเสร็จ|
 | `model_name`    | `String` | `""` |ตำแหน่งโมเดลที่ เซฟในไฟลเดอร์  assets/weights|
@@ -236,6 +236,68 @@ Json Body
   "protect": 0.2
 }
 ```
+
+
+#### อัปโหลดไฟล์มี index
+```http
+  POST /manage-model/upload/index
+```
+Form data
+
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `modelname`   | `string` |`0-12` |
+| `pth`    | `file` | `"audio/เสียงที่ต้องการแปลง"` |
+| `index`    | `file` | `"audio/เสียงที่ต้องการแปลง"` |
+
+#### อัปโหลดไฟล์ไม่มี index
+
+```http
+  POST /manage-model/upload/not-index
+```
+Form data 
+
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `modelname`   | `string` |`""` |
+| `pth`    | `file` | `pth file` |
+
+
+#### อัปโหลด ไฟล์เสียง
+form data 
+
+```http
+  POST /manage-sound/upload
+```
+Form data
+
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `audioFile`   | `file` |`.mp3 or  .wav` |
+
+
+#### แสดงผลไฟล์เสียงทั้งหมด
+Query Params
+
+```http
+  GET /manage-sound/upload
+```
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `start`   | `int` |`1` |
+| `limit`   | `int` |`5` |
+
+#### แสดงผลไฟล์เสียงทั้งหมด
+Query Params
+
+```http
+  GET /manage-model/view?start=1&limit=5
+```
+| Parameter | Type     |    value     |
+| :-------- | :------- | :------------|
+| `start`   | `int` |`1` |
+| `limit`   | `int` |`5` |
+
 
 ## Run Locally
 
