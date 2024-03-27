@@ -362,3 +362,11 @@ import api collection ใน  postman
 ---
 ##  3.ผลลัพธ์ตัวอย่างการใช้ api 
 
+
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6-b867-3efb201285bc
+
+
+
+
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/0cf12658-675c-4b16-a9ea-f7546e5045bc
+
