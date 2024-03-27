@@ -76,10 +76,12 @@ python main.py
 ## Environment Variables
 
 #### .env ในโฟลเดอร์ Backend
-`NEXT_PUBLIC_APP_URL="http://localhost"`<br>
-`NEXT_PUBLIC_APP_Port=5000`<br>
+
+NEXT_PUBLIC_APP_URL="http://localhost"
+NEXT_PUBLIC_APP_Port=5000
 
 #### .env.local ในโฟลเดอร์ Backend Frontend
+
 `OPENBLAS_NUM_THREADS = 1`<br>
 `no_proxy = localhost, 127.0.0.1, ::1 `<br>
 `weight_root = assets/weights`<br>
@@ -102,7 +104,7 @@ Json Body
 
 | Parameter | Type     | Value      |Description                |
 | :-------- | :------- | :-------------|:------------------------- |
-| `trainset_dir` | `string` |`""`| training folder path |
+| `trainset_dir` | `string` |`""`|โฟลเดอร์เก็บตัวอย่างไฟล์เสียง ตัวอย่างอยู่ที่ |
 | `exp_dir` | `string` |`""`| Enter experiment name|
 | `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
 | `n_p` | `int` |`nuber core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  Number of cpu processes used to extract pitches and process data|
