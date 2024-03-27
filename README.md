@@ -352,17 +352,7 @@ import api collection ใน  postman
 <video controls>
 <source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4" type="video/mp4">
 </video>
-<video controls width="250">
-  <source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4" type="video/webm" />
 
-  <source src="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4" type="video/mp4" />
-
-  Download the
-  <a href="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4">WEBM</a>
-  or
-  <a href="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/singing_wav2lip.mp4">MP4</a>
-  video.
-</video>
 ---
 ##  2.ผลลัพธ์ตัวอย่างการใช้ api 
 ![](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3)
