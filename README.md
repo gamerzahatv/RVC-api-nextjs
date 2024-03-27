@@ -129,7 +129,7 @@ Json Body
 | :-------- | :------- | :------------|:--------------------------------  |
 | `gpus`    | `LiteralString` |Int-int  or  “” |ใส่เลขgpuที่ใช้คั่นด้วย - เช่น 0-1-2 ใช้card 0 และcard 1 และcard 2|
 | `n_p`    | `int` |   `number core cpu` |Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                      คอร์ซีพียูที่จะใช้ประมวลผล|
-| `f0method`    | `string` |เลือกอันเดียวเท่านั้น ["pm", "harvest", "dio", "rmvpe", "rmvpe_gpu"] |เลือกอัลกอริธึมการแยกระดับเสียง: เมื่อป้อนข้อมูลการร้องเพลง คุณสามารถใช้ pm เพื่อเร่งความเร็ว สำหรับเสียงพูดคุณภาพสูงแต่ CPU ต่ำ คุณสามารถใช้ dio เพื่อเร่งความเร็ว havest มีคุณภาพดีกว่า แต่ช้ากว่า rmvpe ให้เอฟเฟกต์และการบริโภคที่ดีที่สุด CPU/GPU น้อยลง |
+| `f0method`    | `string` |เลือกอันเดียวเท่านั้น  ["pm", "harvest", "crepe", "rmvpe"] |เลือกอัลกอริธึมการแยกระดับเสียง คุณสามารถใช้ PM เพื่อเพิ่มความเร็วในการร้องเพลงอินพุต Harvest ให้เสียงเบสที่ดีแต่ช้ามาก Crepe ให้เอฟเฟกต์ที่ดีแต่ใช้ GPU rmvpe ให้เอฟเฟกต์ที่ดีที่สุดและใช้ GPU เล็กน้อย|
 | `if_f0`    | `boolean` |  true or false |ต้องใช้สำหรับการร้องเพลง แต่ไม่จำเป็นสำหรับการพูด|
 | `exp_dir`    | `string` |     ""  |ชื่อโมเดลที่ต้องการเทรน|
 | `version19`    | `string` |    “v1” or “v2”  |เวอร์ชั่น|
@@ -166,7 +166,7 @@ Json Body
 | `pretrained_D15`    | `String` | `“”` |โหลด the pre-trained base model d path|
 | `gpus`    | `LiteralString` | `“ Int-int “  or  “”` |ใส่เลขgpuที่ใช้คั่นด้วย - เช่น 0-1-2 ใช้บัตร 0 และcard 1 และcard 2|
 | `if_cache_gpu`    | `String` | `Yes , No` |แคชชุดการฝึกทั้งหมดไว้ในหน่วยความจำข้อมูลขนาดเล็กที่ใช้เวลาไม่ถึง 10 นาทีสามารถแคชได้เพื่อเร่งการฝึก การแคชข้อมูลขนาดใหญ่จะทำให้หน่วยความจำ ตันและจะไม่เพิ่มความเร็วมากนัก|
-| `if_save_every_weights`    | `String` | `Yes , No`|บันทึกโมเดลสุดท้ายขนาดเล็กลงในโฟลเดอร์ 'น้ำหนัก' ที่จุดบันทึกแต่ละจุด|
+| `if_save_every_weights`    | `String` | `Yes , No`|บันทึกโมเดลสุดท้ายขนาดเล็กลงในโฟลเดอร์ 'assets/weights'ในแต่ละx ของ save_epoch|
 | `version19`    | `String` | `v1 , v2` |เวอร์ชั่น|
 ```json
 {
@@ -210,16 +210,16 @@ Json Body
 | Parameter | Type     |    value     | Description                       |
 | :-------- | :------- | :------------|:--------------------------------  |
 | `f0up_key`    | `int` |`0-12` |ปรับเสียงสูงเสียงต่ำ|
-| `input_path`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `index_path`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `opt_path`    | `String` | `"audio_output/sample.wav"` |เวอร์ชั่น|
-| `version19`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `model_name`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `index_rate`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `filter_radius`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `resample_sr`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `rms_mix_rate`    | `String` | `v1 , v2` |เวอร์ชั่น|
-| `protect`    | `String` | `v1 , v2` |เวอร์ชั่น|
+| `input_path`    | `String` | `"audio/เสียงที่ต้องการแปลง"` |ตำแหน่งของโฟลเดอร์ที่ต้องการแปลงเสียง|
+| `index_path`    | `String` | `""` |ตำแหน่งของไฟล์index|
+| `f0method`    | `String` | `"["pm", "harvest", "crepe", "rmvpe"]"` |เลือกอัลกอริทึม["pm", "harvest", "crepe", "rmvpe"]|
+| `opt_path`    | `String` | `"audio_output/ไฟล์เสียงที่แปลงเสียงเสร็จแล้ว"` |ไฟล์ที่ได้หลักจากประมวลผลเสร็จ|
+| `model_name`    | `String` | `""` |ตำแหน่งโมเดลที่ เซฟในไฟลเดอร์  assets/weights|
+| `index_rate`    | `float` | `0-1 (stem0.01)` |Search feature ratio (controls accent strength, too high has artifacting)|
+| `filter_radius`    | `int` | `0-7 (step1)` |If ≥3: apply median filtering to the harvested pitch results. The value represents the filter radius and can reduce breathiness|
+| `resample_sr`    | `int` | `0-48000 (step1)` |Post-processing resampling to the final sampling rate, 0 means no resampling|
+| `rms_mix_rate`    | `float` | `0-1  (step 0.01)` |Adjust the volume envelope scaling. Closer to 0, the more it mimicks the volume of the original vocals. Can help mask noise and make volume sound more natural when set relatively low. Closer to 1 will be more of a consistently loud volume|
+| `protect`    | `float` | `0-0.5  (step 0.01)` |Protect voiceless consonants and breath sounds to prevent artifacts such as tearing in electronic music. Set to 0.5 to disable. Decrease the value to increase protection, but it may reduce indexing accuracy:|
 
 ```json
 {
