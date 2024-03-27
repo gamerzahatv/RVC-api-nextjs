@@ -82,16 +82,17 @@ NEXT_PUBLIC_APP_Port=5000
 ```
 
 #### .env.local ในโฟลเดอร์ Backend Frontend
-
-OPENBLAS_NUM_THREADS = 1`
-`no_proxy = localhost, 127.0.0.1, ::1 `
-`weight_root = assets/weights`
-`weight_uvr5_root = assets/uvr5_weights`
-`index_root = logs`
-`rmvpe_root = assets/rmvpe`
-`sound_path = audio`
-`model_path = assets/weights`
-`extensions_sound =".mp3,.wav"`
+```plaintext
+OPENBLAS_NUM_THREADS = 1
+no_proxy = localhost, 127.0.0.1, ::1 
+weight_root = assets/weights
+weight_uvr5_root = assets/uvr5_weights
+index_root = logs
+rmvpe_root = assets/rmvpe
+sound_path = audio
+model_path = assets/weights
+extensions_sound =".mp3,.wav"
+```
 
 ## คู่มือการใช้ api
 
@@ -105,8 +106,8 @@ Json Body
 
 | Parameter | Type     | Value      |Description                |
 | :-------- | :------- | :-------------|:------------------------- |
-| `trainset_dir` | `string` |`""`|โฟลเดอร์เก็บตัวอย่างไฟล์เสียง ตัวอย่างอยู่ที่ |
-| `exp_dir` | `string` |`""`| Enter experiment name|
+| `trainset_dir` | `string` |`""`|โฟลเดอร์เก็บตัวอย่างไฟล์เสียง ตัวอย่าง [คลิ๊ก](https://github.com/gamerzahatv/RVC-api-nextjs/tree/main/Backend/dataset)|
+| `exp_dir` | `string` |`""`| ชื่อโมเดลที่ต้องการเทรน|
 | `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
 | `n_p` | `int` |`nuber core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  Number of cpu processes used to extract pitches and process data|
 
@@ -130,7 +131,7 @@ Json Body
 | `n_p`    | `int` |   `nuber core cpu` |Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                      คอร์ซีพียู|
 | `f0method`    | `string` |  เลือกอันเดียวเท่านั้น ["pm", "harvest", "dio", "rmvpe", "rmvpe_gpu"] เลือกอัลกอริธึมการแยกระดับเสียง: เมื่อป้อนข้อมูลการร้องเพลง คุณสามารถใช้ pm เพื่อเร่งความเร็ว สำหรับเสียงพูดคุณภาพสูงแต่ CPU ต่ำ คุณสามารถใช้ dio เพื่อเร่งความเร็ว การเก็บเกี่ยวมีคุณภาพดีกว่า แต่ช้ากว่า rmvpe ให้เอฟเฟกต์และการบริโภคที่ดีที่สุด CPU/GPU น้อยลง |
 | `if_f0`    | `boolean` |  true or false |ต้องใช้สำหรับการร้องเพลง แต่ไม่จำเป็นสำหรับการพูด|
-| `exp_dir`    | `string` |     ""  |ตั้งชื่อโมเดลที่ต้องการเทรน|
+| `exp_dir`    | `string` |     ""  |ชื่อโมเดลที่ต้องการเทรน|
 | `version19`    | `string` |    “v1” or “v2”  |เวอร์ชั่น|
 | `gpus_rmvpe`    | `LiteralString` | “ Int-int “  or  “” |การกำหนดค่าหมายเลขการ์ด Rmvpe: แยกหมายเลขอินพุตการ์ดของกระบวนการต่างๆ ที่ใช้ เช่น 0 0 1 ใช้เพื่อรัน 2 โปรเซสบนการ์ด 0 และรัน 1 โปรเซสบนการ์ด 1|
 ```json
