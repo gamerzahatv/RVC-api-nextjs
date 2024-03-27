@@ -348,17 +348,18 @@ import api collection ใน  postman
  - [env_api](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/docs/postman_collection/local_test.postman_environment.json)
  
 ---
-##  1,ผลลัพธ์อย่างการใช้ api กับ  wav2lip
-
-
-
+##  ตัวอย่างที่1ผลลัพธ์อย่างการใช้ api กับ  wav2lip
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/f623614b-ed90-40a6-b867-3efb201285bc
 
 ---
-##  2.ผลลัพธ์ตัวอย่างการใช้ api 
-![](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3)
-<audio controls="controls">
-  <source type="https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3" src="filename.mp3"></source>
-</audio>
----
-##  3.ผลลัพธ์ตัวอย่างการใช้ api 
+##  ตัวอย่างที่2ผลลัพธ์ตัวอย่างการใช้ api 
+ต้นฉบับ
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/140ef1bb-ee55-4bf2-91b1-10862f0388ba
 
+
+
+ผลลัพธ์
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/187aa288-065c-457b-95c1-9c4c9146572f
+
+mix
+https://github.com/gamerzahatv/RVC-api-nextjs/assets/79438623/e85945f2-02b1-40ee-b3d3-bf4f8092d54f
