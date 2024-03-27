@@ -342,11 +342,17 @@ Query Params
 | `filename`   | `string` |`"ไฟล์เสียงในโฟลเดอร์ audio"` |
 ---
 
-
 ## ทดสอบการใช้งานกับ Postman
 import api collection ใน  postman
  - [api collection](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/docs/postman_collection/API_RVC.postman_collection.json)
  - [env_api](https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/docs/postman_collection/local_test.postman_environment.json)
-
-
+ 
+---
+##  1,ผลลัพธ์อย่างการใช้ api กับ  wav2lip
+https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample1/api%2Bwav2lip.mp4
+---
+##  2.ผลลัพธ์ตัวอย่างการใช้ api 
+https://github.com/gamerzahatv/RVC-api-nextjs/blob/main/sample/sample2/clone/instragramclone.mp3
+---
+##  3.ผลลัพธ์ตัวอย่างการใช้ api 
 
