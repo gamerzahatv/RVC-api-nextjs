@@ -108,8 +108,8 @@ Json Body
 | :-------- | :------- | :-------------|:------------------------- |
 | `trainset_dir` | `string` |`""`|โฟลเดอร์เก็บตัวอย่างไฟล์เสียง ตัวอย่าง [คลิ๊ก](https://github.com/gamerzahatv/RVC-api-nextjs/tree/main/Backend/dataset)|
 | `exp_dir` | `string` |`""`| ชื่อโมเดลที่ต้องการเทรน|
-| `sr` | `string` |`“40k”,”48k” [Default = 40k]`| target sampling rate in folder config  |
-| `n_p` | `int` |`nuber core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  Number of cpu processes used to extract pitches and process data|
+| `sr` | `string` |`“40k”,”48k” [Default = 40k]`| ปรับค่าความละเอียดของเสียง |
+| `n_p` | `int` |`number core cpu`| Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]  คอร์ซีพียูที่จะใช้ประมวลผล|
 
 ```json
 {
@@ -128,7 +128,7 @@ Json Body
 | Parameter | Type     |    value     | Description                       |
 | :-------- | :------- | :------------|:--------------------------------  |
 | `gpus`    | `LiteralString` |Int-int  or  “” |ใส่เลขgpuที่ใช้คั่นด้วย - เช่น 0-1-2 ใช้บัตร 0 และบัตร 1 และบัตร 2|
-| `n_p`    | `int` |   `nuber core cpu` |Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                      คอร์ซีพียู|
+| `n_p`    | `int` |   `number core cpu` |Int(np.ceil(config.n_cpu/1.5))   [min=0  max=config.n_cpu]                      คอร์ซีพียูที่จะใช้ประมวลผล|
 | `f0method`    | `string` |  เลือกอันเดียวเท่านั้น ["pm", "harvest", "dio", "rmvpe", "rmvpe_gpu"] เลือกอัลกอริธึมการแยกระดับเสียง: เมื่อป้อนข้อมูลการร้องเพลง คุณสามารถใช้ pm เพื่อเร่งความเร็ว สำหรับเสียงพูดคุณภาพสูงแต่ CPU ต่ำ คุณสามารถใช้ dio เพื่อเร่งความเร็ว การเก็บเกี่ยวมีคุณภาพดีกว่า แต่ช้ากว่า rmvpe ให้เอฟเฟกต์และการบริโภคที่ดีที่สุด CPU/GPU น้อยลง |
 | `if_f0`    | `boolean` |  true or false |ต้องใช้สำหรับการร้องเพลง แต่ไม่จำเป็นสำหรับการพูด|
 | `exp_dir`    | `string` |     ""  |ชื่อโมเดลที่ต้องการเทรน|
